@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.choa.board.BoardDTO;
 import com.choa.ex4.MyTestConfiguration;
+import com.choa.util.ListInfo;
 import com.choa.util.PageMaker;
 
 
@@ -44,10 +45,13 @@ public class NoticeDAOimplTest extends MyTestConfiguration{
 	}*/
 	@Test
 	public void list_Test()throws Exception{
-		PageMaker pageMaker = new PageMaker(10,1);
-		List<BoardDTO> ar = noticeDAOimpl.boardList(pageMaker.getRowMaker(null, null),"title","t");
-		System.out.println("arsize : "+ar.size());
-		assertNotEquals(0, ar.size());
+		ListInfo listInfo = new ListInfo();
+		listInfo.setFind("test");
+		listInfo.setSearch("writer");
+		int count =noticeDAOimpl.boardCount(listInfo);
+		
+		System.out.println("count : "+count);
+		assertNotEquals(0, count);
 		
 	}
 	/*//@Test

@@ -10,6 +10,7 @@ import com.choa.board.BoardDAO;
 import com.choa.board.BoardDTO;
 import com.choa.board.BoardService;
 import com.choa.notice.NoticeDAOimpl;
+import com.choa.util.ListInfo;
 import com.choa.util.PageMaker;
 import com.choa.util.RowMaker;
 
@@ -20,7 +21,7 @@ public class FreeboardServiceimpl implements BoardService{
 	private FreeboardDAOimpl freeboardDAOimpl;
 	
 	@Override
-	public List<BoardDTO> boardList(Integer curPage,String search, String find) throws Exception {
+	public List<BoardDTO> boardList(ListInfo listInfo) throws Exception {
 		PageMaker pageMaker = new PageMaker(curPage);
 		return freeboardDAOimpl.boardList(pageMaker.getRowMaker(null, null),search,find);
 	}

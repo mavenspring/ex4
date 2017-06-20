@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.choa.board.BoardDTO;
 import com.choa.notice.NoticeDTO;
 import com.choa.notice.NoticeServiceimpl;
+import com.choa.util.ListInfo;
 import com.choa.util.MakePage;
 import com.choa.util.PageMaker;
 import com.choa.util.RowMaker;
@@ -31,22 +32,27 @@ public class NoticeController {
 	
 	
 	@RequestMapping(value="noticeList", method = RequestMethod.GET)
-	public String noticeList(Model model,@RequestParam(defaultValue="1")Integer curPage, String search, String find)throws Exception{
+	public String noticeList(Model model, ListInfo listInfo)throws Exception{
 		
-		List<BoardDTO> ar=noticeService.boardList(curPage,search,find);
+		List<BoardDTO> ar = noticeService.boardList(listInfo);
 		model.addAttribute("list", ar);
 		model.addAttribute("board", "notice");
-		model.addAttribute("curPage", curPage);
-		model.addAttribute("search", search);
-		model.addAttribute("find", find);
+		model.addAttribute("listInfo", listInfo);
+	
 		return "board/boardList";
 		
 	}
 	//Write
 	@RequestMapping(value="noticeWrite", method = RequestMethod.GET)
 	public void noticeWrite(Model model, HttpServletRequest request)throws Exception{
-		
-		model.addAttribute("path", "Write");
+		String path = request.getParameter("path");
+		System.out.println("path :"+path);
+		if(path==null || path ==""){
+			path = "Write";
+		}else{
+			path = "Update";
+		}
+		model.addAttribute("path", path);
 	}
 	//Write
 	@RequestMapping(value="noticeWrite", method = RequestMethod.POST)
@@ -78,8 +84,8 @@ public class NoticeController {
 		
 		rd.addFlashAttribute("dto", boardDTO);
 		/*rd.addFlashAttribute("path", "Update");*/
-		model.addAttribute("path", "Update");
-		return "redirect:noticeWrite";
+		/*model.addAttribute("path", "Update");*/
+		return "redirect:noticeWrite?path=Update";
 	}
 	//Update, 데이터 수정하기
 	@RequestMapping(value="noticeUpdate", method = RequestMethod.POST)

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.choa.freeboard.FreeboardServiceimpl;
+import com.choa.util.ListInfo;
 
 @Controller
 @RequestMapping(value="/freeboard/**")
@@ -21,9 +22,9 @@ public class FreeboardController {
 	private FreeboardServiceimpl freeboardServiceimpl ;
 	
 	@RequestMapping(value="freeboardList", method=RequestMethod.GET)
-	public String freeboardList(@RequestParam(defaultValue="1")Integer curPage,Model model,String search, String find)throws Exception{
+	public String freeboardList(Model model,ListInfo listInfo)throws Exception{
 		model.addAttribute("board","freeboard");
-		model.addAttribute("list", freeboardServiceimpl.boardList(curPage,search,find));
+		model.addAttribute("list", freeboardServiceimpl.boardList(listInfo));
 		return "board/boardList";
 	}
 	

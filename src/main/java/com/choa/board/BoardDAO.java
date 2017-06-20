@@ -3,12 +3,13 @@ package com.choa.board;
 import java.security.spec.ECFieldF2m;
 import java.util.List;
 
+import com.choa.util.ListInfo;
 import com.choa.util.RowMaker;
 
 public interface BoardDAO {
 	
 	//list
-	public List<BoardDTO> boardList(RowMaker rowMaker,String search,String find)throws Exception;
+	public List<BoardDTO> boardList(ListInfo listInfo)throws Exception;
 	
 	//view
 	public BoardDTO boardView(int num) throws Exception;
@@ -23,7 +24,7 @@ public interface BoardDAO {
 	public int boardDelete(int num)throws Exception;
 	
 	//totalCount
-	public int boardCount()throws Exception;
+	public int boardCount(ListInfo listInfo)throws Exception;
 	
 	//hit
 	public void boardHit(int num)throws Exception;
