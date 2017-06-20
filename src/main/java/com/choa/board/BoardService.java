@@ -5,7 +5,7 @@ import java.util.List;
 public interface BoardService {
 	
 	//list
-	public List<BoardDTO> boardList(int curPage	)throws Exception;
+	public List<BoardDTO> boardList(Integer curPage,String search, String find	)throws Exception;
 	
 	//view
 	public BoardDTO boardView(int num)throws Exception;
@@ -18,6 +18,8 @@ public interface BoardService {
 	
 	//delete
 	public int boardDelete(int num)throws Exception;
+
+
 	
 	
 }

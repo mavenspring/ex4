@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,10 +21,10 @@ import com.choa.util.PageMaker;
 
 public class NoticeDAOimplTest extends MyTestConfiguration{
 
-	@Autowired
+	@Inject
 	private  NoticeDAOimpl noticeDAOimpl;
 	
-	//@Test
+	/*//@Test
 	public void connectionTest()throws Exception{
 		NoticeDTO noticeDTO = new NoticeDTO();
 		noticeDTO.setNum(55);
@@ -32,27 +34,27 @@ public class NoticeDAOimplTest extends MyTestConfiguration{
 		int result =  noticeDAOimpl.boardUpdate(noticeDTO);
 		System.out.println("result Test : "+result);
 		assertEquals(1, result);
-	}
-	//@Test
+	}*/
+	/*//@Test
 	public void deleteTest()throws Exception{
 		int num = 441;
 		int result =  noticeDAOimpl.boardDelete(num);
 		System.out.println("result Test : "+result);
 		assertEquals(1, result);
-	}
+	}*/
 	@Test
 	public void list_Test()throws Exception{
-		PageMaker pageMaker = new PageMaker(1,20);
-		List<BoardDTO> ar = noticeDAOimpl.boardList(pageMaker.getRowMaker(null, null));
+		PageMaker pageMaker = new PageMaker(10,1);
+		List<BoardDTO> ar = noticeDAOimpl.boardList(pageMaker.getRowMaker(null, null),"title","t");
 		System.out.println("arsize : "+ar.size());
 		assertNotEquals(0, ar.size());
 		
 	}
-	@Test
+	/*//@Test
 	public void count_Test()throws Exception{
 		int count = noticeDAOimpl.boardCount();
 		System.out.println("count : "+count);
 		assertNotEquals(0, count);
 		
-	}
+	}*/
 }

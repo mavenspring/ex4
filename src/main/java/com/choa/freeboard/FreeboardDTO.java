@@ -2,7 +2,7 @@ package com.choa.freeboard;
 
 import com.choa.board.BoardDTO;
 
-class FreeboadDTO extends BoardDTO{
+class FreeboardDTO extends BoardDTO{
 	private int ref;
 	private int step;
 	private int depth;

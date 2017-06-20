@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -31,9 +32,12 @@ public class NoticeDAOimpl implements BoardDAO{
 	}*/
 	
 	@Override
-	public List<BoardDTO> boardList(RowMaker rowMaker) throws Exception {
-		
-		return sqlSession.selectList(NAMESPACE+"list", rowMaker);
+	public List<BoardDTO> boardList(RowMaker rowMaker,String search,String find) throws Exception {
+		HashMap<String, Object> map = new HashMap<String,Object>();
+		map.put("rowMaker", rowMaker);
+		map.put("search", search);
+		map.put("find", find);
+		return sqlSession.selectList(NAMESPACE+"list", map);
 		
 	}
 

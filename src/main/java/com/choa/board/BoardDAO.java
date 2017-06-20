@@ -8,7 +8,7 @@ import com.choa.util.RowMaker;
 public interface BoardDAO {
 	
 	//list
-	public List<BoardDTO> boardList(RowMaker rowMaker)throws Exception;
+	public List<BoardDTO> boardList(RowMaker rowMaker,String search,String find)throws Exception;
 	
 	//view
 	public BoardDTO boardView(int num) throws Exception;

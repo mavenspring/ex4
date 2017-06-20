@@ -31,11 +31,14 @@ public class NoticeController {
 	
 	
 	@RequestMapping(value="noticeList", method = RequestMethod.GET)
-	public String noticeList(Model model,@RequestParam(defaultValue="1")Integer curPage)throws Exception{
+	public String noticeList(Model model,@RequestParam(defaultValue="1")Integer curPage, String search, String find)throws Exception{
 		
-		List<BoardDTO> ar=noticeService.boardList(curPage);
+		List<BoardDTO> ar=noticeService.boardList(curPage,search,find);
 		model.addAttribute("list", ar);
 		model.addAttribute("board", "notice");
+		model.addAttribute("curPage", curPage);
+		model.addAttribute("search", search);
+		model.addAttribute("find", find);
 		return "board/boardList";
 		
 	}

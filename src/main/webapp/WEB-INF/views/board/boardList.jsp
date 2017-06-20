@@ -50,6 +50,11 @@
 		</c:forEach>
 	</table>
 	<a href="${board }Write">WRITE</a>
+	<div>
+		<p>curPage	: ${curPage}</p>
+		<p>Search	: ${search }</p>
+		<p>Find 	: ${find }</p>
+	</div>
 	
 </body>
 </html>

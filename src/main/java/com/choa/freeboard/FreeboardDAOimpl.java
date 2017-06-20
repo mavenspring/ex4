@@ -27,7 +27,7 @@ public class FreeboardDAOimpl implements BoardDAO {
 	private static final String NAMESPACE ="Freeboard.";
 
 	@Override
-	public List<BoardDTO> boardList(RowMaker rowMaker) throws Exception {
+	public List<BoardDTO> boardList(RowMaker rowMaker,String search,String find) throws Exception {
 		
 		return sqlSession.selectList(NAMESPACE+"list", rowMaker);
 	}

@@ -8,20 +8,21 @@ import org.springframework.stereotype.Service;
 
 import com.choa.board.BoardDAO;
 import com.choa.board.BoardDTO;
+import com.choa.board.BoardService;
 import com.choa.notice.NoticeDAOimpl;
 import com.choa.util.PageMaker;
 import com.choa.util.RowMaker;
 
 @Service
-public class FreeboardServiceimpl implements BoardDAO{
+public class FreeboardServiceimpl implements BoardService{
 
 	@Inject
 	private FreeboardDAOimpl freeboardDAOimpl;
 	
 	@Override
-	public List<BoardDTO> boardList(Integer curPage) throws Exception {
-		
-		return freeboardDAOimpl.boardList(pageMaker.getRowMaker(null, null));
+	public List<BoardDTO> boardList(Integer curPage,String search, String find) throws Exception {
+		PageMaker pageMaker = new PageMaker(curPage);
+		return freeboardDAOimpl.boardList(pageMaker.getRowMaker(null, null),search,find);
 	}
 
 	@Override
@@ -48,22 +49,16 @@ public class FreeboardServiceimpl implements BoardDAO{
 		return 0;
 	}
 
-	@Override
+
 	public int boardCount() throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	
 	public void boardHit(int num) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public List<BoardDTO> boardList(RowMaker rowMaker) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }
