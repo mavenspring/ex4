@@ -20,7 +20,7 @@ public class FreeboardServiceimpl implements BoardDAO{
 	
 	@Override
 	public List<BoardDTO> boardList(Integer curPage) throws Exception {
-		PageMaker pageMaker = new PageMaker(curPage);
+		
 		return freeboardDAOimpl.boardList(pageMaker.getRowMaker(null, null));
 	}
 

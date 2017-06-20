@@ -1,4 +1,4 @@
-package com.choa.freeboard;
+package com.choa.ex4;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.choa.freeboard.FreeboardServiceimpl;
 
 @Controller
 @RequestMapping(value="/freeboard/**")

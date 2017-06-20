@@ -1,8 +1,11 @@
-package com.choa.notice;
+package com.choa.ex4;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.choa.board.BoardDTO;
+import com.choa.notice.NoticeDTO;
+import com.choa.notice.NoticeServiceimpl;
 import com.choa.util.MakePage;
 import com.choa.util.PageMaker;
 import com.choa.util.RowMaker;
@@ -36,7 +41,8 @@ public class NoticeController {
 	}
 	//Write
 	@RequestMapping(value="noticeWrite", method = RequestMethod.GET)
-	public void noticeWrite(Model model)throws Exception{
+	public void noticeWrite(Model model, HttpServletRequest request)throws Exception{
+		
 		model.addAttribute("path", "Write");
 	}
 	//Write
@@ -59,15 +65,18 @@ public class NoticeController {
 	public void noticeView(Integer num,Model model)throws Exception{
 		if(num==null){}
 	    BoardDTO boardDTO = noticeService.boardView(num);
-	    model.addAttribute("noticeDTO", boardDTO);
+	    model.addAttribute("dto", boardDTO);
 	}
 	
 	//Update , 데이터 가져오기
 	@RequestMapping(value="noticeUpdate", method = RequestMethod.GET)
-	public void noticeUpdate(@RequestParam(defaultValue="1") Integer num , Model model)throws Exception{
+	public String noticeUpdate(@RequestParam(defaultValue="1") Integer num , Model model,RedirectAttributes rd)throws Exception{
 		BoardDTO boardDTO = noticeService.boardView(num);
-		model.addAttribute("noticeDTO", boardDTO);
 		
+		rd.addFlashAttribute("dto", boardDTO);
+		/*rd.addFlashAttribute("path", "Update");*/
+		model.addAttribute("path", "Update");
+		return "redirect:noticeWrite";
 	}
 	//Update, 데이터 수정하기
 	@RequestMapping(value="noticeUpdate", method = RequestMethod.POST)

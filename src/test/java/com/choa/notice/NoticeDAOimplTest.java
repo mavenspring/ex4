@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,20 +20,39 @@ import com.choa.util.PageMaker;
 public class NoticeDAOimplTest extends MyTestConfiguration{
 
 	@Autowired
-	private NoticeDAOimpl noticeDAO;
+	private  NoticeDAOimpl noticeDAOimpl;
 	
-	//@Test 이렇게 만해주면 실행안됨
-	public void test()throws Exception {
-		PageMaker pageMaker = new PageMaker(1,10);
-		
-		List<BoardDTO> ar = noticeDAO.boardList(pageMaker.getRowMaker(null, null));
-		assertEquals(0, ar.size());    // null 이면 빨간색 not null 이면 초록색	
+	//@Test
+	public void connectionTest()throws Exception{
+		NoticeDTO noticeDTO = new NoticeDTO();
+		noticeDTO.setNum(55);
+		noticeDTO.setWriter("Americano");
+		noticeDTO.setTitle("커피 꿀맛");
+		noticeDTO.setContents("hohoho");
+		int result =  noticeDAOimpl.boardUpdate(noticeDTO);
+		System.out.println("result Test : "+result);
+		assertEquals(1, result);
 	}
-	
+	//@Test
+	public void deleteTest()throws Exception{
+		int num = 441;
+		int result =  noticeDAOimpl.boardDelete(num);
+		System.out.println("result Test : "+result);
+		assertEquals(1, result);
+	}
 	@Test
-	public void test2()throws Exception{
-		int result = noticeDAO.boardDelete(32);
-		assertEquals(1, result); // (예상값, 코드 결과값) 
+	public void list_Test()throws Exception{
+		PageMaker pageMaker = new PageMaker(1,20);
+		List<BoardDTO> ar = noticeDAOimpl.boardList(pageMaker.getRowMaker(null, null));
+		System.out.println("arsize : "+ar.size());
+		assertNotEquals(0, ar.size());
+		
 	}
-
+	@Test
+	public void count_Test()throws Exception{
+		int count = noticeDAOimpl.boardCount();
+		System.out.println("count : "+count);
+		assertNotEquals(0, count);
+		
+	}
 }
