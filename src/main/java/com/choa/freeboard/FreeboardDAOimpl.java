@@ -24,7 +24,7 @@ public class FreeboardDAOimpl implements BoardDAO {
 	
 	@Inject
 	private SqlSession sqlSession;
-	private static final String NAMESPACE ="Freeboard.";
+	private static final String NAMESPACE ="FreeboardMapper.";
 
 	@Override
 	public List<BoardDTO> boardList(RowMaker rowMaker,String search,String find) throws Exception {
